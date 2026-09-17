@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>冉起阳 · 个人展示平台</title>
+  <meta name="description" content="冉起阳的个人展示平台 —— 电子信息（研究生）· 嵌入式开发爱好者，展示个人能力与项目作品。" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- 导航 -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#home" class="nav__logo">冉<span>起阳</span></a>
+      <nav class="nav__links" id="navLinks">
+        <a href="#home">首页</a>
+        <a href="#about">关于我</a>
+        <a href="#projects">项目作品</a>
+        <a href="#skills">技能</a>
+        <a href="#education">教育经历</a>
+        <a href="#awards">荣誉证书</a>
+        <a href="#contact">联系</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="菜单">☰</button>
+    </div>
+  </header>
+
+  <!-- 首页 Hero -->
+  <section class="hero" id="home">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__inner reveal">
+      <div class="hero__avatar" aria-hidden="true">
+        <svg viewBox="0 0 120 120" width="120" height="120">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#4f46e5"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+          <circle cx="60" cy="60" r="58" fill="url(#g)"/>
+          <text x="60" y="60" text-anchor="middle" dominant-baseline="central"
+                font-size="52" fill="#fff" font-family="'PingFang SC','Microsoft YaHei',sans-serif">冉</text>
+        </svg>
+      </div>
+      <p class="hero__eyebrow">个人展示平台 · Personal Portfolio</p>
+      <h1 class="hero__name">冉起阳</h1>
+      <p class="hero__title">上海杉达学院 · 电子信息（硕士研究生）</p>
+      <p class="hero__tagline">嵌入式开发爱好者 · 软硬件协同 · 自动控制与机器人</p>
+      <div class="hero__meta">
+        <span>📍 上海</span>
+        <span>🎓 郑州西亚斯学院 本科 → 上海杉达学院 研究生</span>
+      </div>
+      <div class="hero__actions">
+        <a href="#projects" class="btn btn--primary">查看项目作品</a>
+        <a href="#contact" class="btn btn--ghost">联系我</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我 -->
+  <section class="section" id="about">
+    <div class="section__head reveal">
+      <h2 class="section__title">关于我</h2>
+      <p class="section__sub">Who I am</p>
+    </div>
+    <div class="about reveal">
+      <div class="about__bio">
+        <p>
+          我是<strong>冉起阳</strong>，现为<strong>上海杉达学院电子信息专业硕士研究生</strong>，本科毕业于
+          <strong>郑州西亚斯学院自动化专业</strong>。从本科起便深耕嵌入式与自动控制方向，自主学习
+          51/STM32 单片机、Altium Designer PCB 绘制、SolidWorks 三维建模，形成了"软件 + 硬件"的完整技术链。
+        </p>
+        <p>
+          我热爱把理论转化为可运行的系统：独立完成过平衡车、无人机等嵌入式控制项目，也作为团队核心
+          组织并带领队员参与多项电子设计/机器人竞赛。对嵌入式有强烈热情，学习与问题解决能力突出。
+        </p>
+      </div>
+      <div class="about__cards">
+        <div class="acard">
+          <div class="acard__icon">📚</div>
+          <h3>学业与理论基础</h3>
+          <p>核心课程 GPA 名列前茅，扎实掌握自动控制原理、嵌入式系统等核心理论，具备将理论转化为实践能力。</p>
+        </div>
+        <div class="acard">
+          <div class="acard__icon">🔧</div>
+          <h3>专业技能与实践</h3>
+          <p>热爱嵌入式开发，主动开展小项目实践；学习能力突出，乐于动手操作，在实践中积累解决问题的经验。</p>
+        </div>
+        <div class="acard">
+          <div class="acard__icon">🤝</div>
+          <h3>个人素养与协作</h3>
+          <p>性格开朗稳重、待人真诚；认真负责、吃苦耐劳、纪律性强，具备团队合作精神与无私奉献意识。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目作品（核心展示区） -->
+  <section class="section section--alt" id="projects">
+    <div class="section__head reveal">
+      <h2 class="section__title">项目作品</h2>
+      <p class="section__sub">All Projects · 我曾经做过的项目</p>
+    </div>
+
+    <div class="filters reveal" id="filters">
+      <button class="chip chip--active" data-filter="all">全部</button>
+      <button class="chip" data-filter="embedded">嵌入式控制</button>
+      <button class="chip" data-filter="hardware">硬件/PCB</button>
+      <button class="chip" data-filter="team">团队/竞赛</button>
+    </div>
+
+    <div class="projects" id="projectGrid"><!-- JS 渲染 --></div>
+  </section>
+
+  <!-- 技能 -->
+  <section class="section" id="skills">
+    <div class="section__head reveal">
+      <h2 class="section__title">技能栈</h2>
+      <p class="section__sub">Skills &amp; Tech Stack</p>
+    </div>
+    <div class="skills reveal">
+      <div class="skills__bars" id="skillBars"><!-- JS 渲染 --></div>
+      <div class="skills__tags">
+        <h3>工具与环境</h3>
+        <div class="tags" id="skillTags"><!-- JS 渲染 --></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 教育经历 -->
+  <section class="section section--alt" id="education">
+    <div class="section__head reveal">
+      <h2 class="section__title">教育 &amp; 经历</h2>
+      <p class="section__sub">Education &amp; Experience</p>
+    </div>
+    <div class="timeline reveal" id="timeline"><!-- JS 渲染 --></div>
+  </section>
+
+  <!-- 荣誉证书 -->
+  <section class="section" id="awards">
+    <div class="section__head reveal">
+      <h2 class="section__title">荣誉 &amp; 证书</h2>
+      <p class="section__sub">Awards &amp; Certificates</p>
+    </div>
+    <div class="awards reveal" id="awardGrid"><!-- JS 渲染 --></div>
+  </section>
+
+  <!-- 联系 -->
+  <section class="section section--alt" id="contact">
+    <div class="section__head reveal">
+      <h2 class="section__title">联系方式</h2>
+      <p class="section__sub">Get in touch</p>
+    </div>
+    <div class="contact reveal">
+      <div class="contact__card">
+        <h3>欢迎交流与 Collaboration</h3>
+        <p>如果你对嵌入式、自动控制或机器人项目感兴趣，欢迎随时联系我。</p>
+        <ul class="contact__list">
+          <li><span>📧 邮箱</span><a href="mailto:18339908427@163.com">18339908427@163.com</a></li>
+          <li><span>📱 电话</span><a href="tel:18339908427">18339908427</a></li>
+          <li><span>📍 所在地</span>上海</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> 冉起阳 · 个人展示平台 · Built with ❤️</p>
+  </footer>
+
+  <!-- 项目详情弹窗 -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true">
+      <button class="modal__close" data-close aria-label="关闭">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
