@@ -121,6 +121,15 @@ h1, h2, h3 { line-height: 1.25; }
 .tag { font-size: 12px; background: var(--bg-alt); color: var(--ink-soft); padding: 4px 10px; border-radius: 8px; }
 .pcard__more { color: var(--brand); font-weight: 700; font-size: 14px; }
 
+/* 未来项目：规划中状态的视觉区分 */
+.future__hint { text-align: center; color: var(--ink-soft); max-width: 640px; margin: 0 auto 36px; font-size: 15px; }
+.future__hint code { background: var(--brand-soft); color: var(--brand); padding: 2px 8px; border-radius: 6px; font-size: 13px; }
+.pcard--future { border-style: dashed; border-color: #c7d2fe; background: linear-gradient(180deg, #fbfbff, #fff); }
+.pcard--future .pcard__cat--plan { background: #fff7ed; color: #ea580c; }
+.pcard__status { font-size: 12px; padding: 4px 10px; border-radius: 999px; font-weight: 700; white-space: nowrap; }
+.pcard__status--plan { background: #fff7ed; color: #ea580c; }
+.pcard__status--doing { background: #ecfdf5; color: #059669; }
+
 /* ---------- 技能 ---------- */
 .skills { display: grid; grid-template-columns: 1.2fr 1fr; gap: 44px; }
 .skills__bars { display: grid; gap: 18px; }

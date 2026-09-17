@@ -1,6 +1,9 @@
 /* =========================================================
    冉起阳 · 个人展示平台  —  数据驱动渲染
-   想新增项目？直接在 projects 数组里加一条即可。
+   想新增【已完成】项目？在 projects 数组里加一条。
+   想新增【未来/进行中】项目？在 futureProjects 数组里加一条。
+   字段说明：title 标题 / period 时间 / status 状态(plan|doing，仅未来项目用)
+   / catLabel 分类 / tags 标签数组 / summary 摘要 / details 详情数组
    ========================================================= */
 
 /* ---------- 项目数据 ---------- */
@@ -58,6 +61,38 @@ const projects = [
   }
 ];
 
+/* ---------- 未来 / 进行中的个人项目 ----------
+   想添加新项目，复制下面任意一条 {...} 再改内容即可。
+   status: "plan" = 规划中（橙色）, "doing" = 进行中（绿色） */
+const futureProjects = [
+  {
+    title: "（示例）基于 ROS 的移动机器人导航",
+    period: "规划中",
+    status: "plan",
+    catLabel: "机器人 / SLAM",
+    tags: ["ROS", "SLAM", "路径规划", "嵌入式"],
+    summary: "计划搭建一套室内自主导航小车，融合激光雷达与视觉，实现建图与避障。",
+    details: [
+      "（这是一条示例卡片，删除或替换为你自己的未来项目即可。）",
+      "目标：完成小车底盘 + 上位机导航栈，跑通建图与自主路径规划。",
+      "技术路线：STM32 底盘驱动 + ROS 导航 + 激光雷达/视觉感知。"
+    ]
+  },
+  {
+    title: "（示例）AI 视觉缺陷检测平台",
+    period: "进行中",
+    status: "doing",
+    catLabel: "AI / 视觉",
+    tags: ["Python", "OpenCV", "深度学习", "边缘部署"],
+    summary: "面向工业场景的视觉检测小项目，尝试在嵌入式端做轻量化模型部署。",
+    details: [
+      "（这是一条示例卡片，删除或替换为你自己的未来项目即可。）",
+      "目标：采集样本 → 训练轻量模型 → 部署到边缘设备实时推理。",
+      "当前进度：数据集整理与基线模型搭建中。"
+    ]
+  }
+];
+
 /* ---------- 技能数据 ---------- */
 const skills = [
   { name: "C 语言 / 嵌入式编程", level: 90 },
@@ -107,9 +142,9 @@ function renderProjects(filter = "all") {
   grid.innerHTML = "";
   projects
     .filter(p => filter === "all" || p.category === filter)
-    .forEach((p, i) => {
+    .forEach(p => {
       const card = el(`
-        <article class="pcard" data-i="${projects.indexOf(p)}">
+        <article class="pcard">
           <div class="pcard__top">
             <span class="pcard__cat">${p.catLabel}</span>
             <span class="pcard__period">${p.period}</span>
@@ -119,13 +154,38 @@ function renderProjects(filter = "all") {
           <div class="pcard__tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
           <span class="pcard__more">查看详情 →</span>
         </article>`);
-      card.addEventListener("click", () => openModal(projects.indexOf(p)));
+      card.addEventListener("click", () => openModal(p));
       grid.appendChild(card);
     });
 }
 
-function openModal(i) {
-  const p = projects[i];
+function renderFuture() {
+  const grid = document.getElementById("futureGrid");
+  grid.innerHTML = "";
+  if (!futureProjects.length) {
+    grid.appendChild(el(`<p class="future__hint">还没有添加未来的项目，编辑 script.js 里的 futureProjects 数组即可。</p>`));
+    return;
+  }
+  futureProjects.forEach(p => {
+    const statusText = p.status === "doing" ? "进行中" : "规划中";
+    const statusCls = p.status === "doing" ? "pcard__status--doing" : "pcard__status--plan";
+    const card = el(`
+      <article class="pcard pcard--future">
+        <div class="pcard__top">
+          <span class="pcard__cat pcard__cat--plan">${p.catLabel}</span>
+          <span class="pcard__status ${statusCls}">${statusText}</span>
+        </div>
+        <h3>${p.title}</h3>
+        <p class="pcard__summary">${p.summary}</p>
+        <div class="pcard__tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+        <span class="pcard__more">查看规划 →</span>
+      </article>`);
+    card.addEventListener("click", () => openModal(p));
+    grid.appendChild(card);
+  });
+}
+
+function openModal(p) {
   const body = document.getElementById("modalBody");
   body.innerHTML = `
     <p class="modal__cat">${p.catLabel}</p>
@@ -179,6 +239,7 @@ function renderAwards() {
 /* ---------- 交互绑定 ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderProjects();
+  renderFuture();
   renderSkills();
   renderTimeline();
   renderAwards();
